@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
 app.use(cors())
 
-app.use('/api/products/v1',productRouter)
+app.use('/api/products',productRouter)
 app.use('/api/rating',rateRouter)
 app.listen(port,()=>{
     console.log(`server running on port ${port}`)
