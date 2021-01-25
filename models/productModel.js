@@ -29,6 +29,14 @@ const Product=new Schema({
     review:{
         type:String,
         required:true
+    },
+    productImage:{
+        type:String,
+        required:true
+    },
+    tags:{
+        type:Array,
+        required:true
     }
 })
 
@@ -41,6 +49,8 @@ function validateProductSchema(Product) {
         price:Joi.number().required(),
         description:Joi.string().required().max(20).min(2),
         review:Joi.string().required().max(20).min(2),
+        tag:Joi.array().required(),
+        productImage:Joi.string().required()
     }).options({abortEarly:false});
 return JoiSchema.validate(Product)
    
