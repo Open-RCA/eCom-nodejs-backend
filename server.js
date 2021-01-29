@@ -33,10 +33,13 @@ db.mongoose.connect(MONGO_URI, {
     console.error("Connection error", err);
   });
 
-
 app.get('/', (req, res) => {
     res.send("Welcome to open rca's e-commerce")
 })
+
+// routes
+require('./app/routes/auth.routes')(app);
+require('./app/routes/user.routes')(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
