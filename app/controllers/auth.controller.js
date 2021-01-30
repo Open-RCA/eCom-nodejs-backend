@@ -115,21 +115,21 @@ const Role = db.role;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
-exports.signup = (req, res) => {
+exports.signup = async(req, res) => {
   const user = new User({
     fullName: req.body.fullName,
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8),
     userRole: req.body.userRole
   });
-          user.save().then(() =>{
+           await user.save().then(() =>{
 
-            res.status(201).send({ message: "User was registered successfully!" });
+            return res.status(201).send({ message: "User was registered successfully!" });
           })
             .catch(err =>{
               
-              res.status(500).send({ message: err });
-              return;
+              return res.status(500).send({ message: err });
+            
             }) 
 
 
