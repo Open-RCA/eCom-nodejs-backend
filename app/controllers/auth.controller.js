@@ -21,16 +21,16 @@ exports.signup = (req, res) => {
     }
 
     if (req.body.role) {
-      Role.find(
+      Role.findOne(
         {
-          role: req.body.role
+          _id: req.body.role
         },
         (err, role) => {
           if (err) {
             res.status(500).send({ message: err });
             return;
           }
-
+          console.log("role: " + role)
           user.role =  role;
           user.save(err => {
             if (err) {
@@ -43,7 +43,7 @@ exports.signup = (req, res) => {
         }
       );
     } else {
-      Role.findOne({ name: "user" }, (err, role) => {
+      Role.findOne({ role: "user" }, (err, role) => {
         if (err) {
           res.status(500).send({ message: err });
           return;
