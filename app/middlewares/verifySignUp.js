@@ -22,9 +22,10 @@ const checkDuplicateEmail = (req, res, next) => {
 
 checkRolesExisted = (req, res, next) => {
     if (req.body.role) {
-        if (!ROLES.includes(req.body.roles)) {
+      console.log("here", !(ROLES.includes(req.body.role)))
+        if (!(ROLES.includes(req.body.role))) {
           res.status(400).send({
-            message: `Failed! Role ${req.body.roles[i]} does not exist!`
+            message: `Failed! Role ${req.body.role} does not exist!`
           });
           return;
         }
