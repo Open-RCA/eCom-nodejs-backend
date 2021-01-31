@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 const WishlistSchema= mongoose.Schema({
     user_id: {
         type: mongoose.Types.ObjectId,
-        required: true
     },
     product_id: {
         type: mongoose.Types.ObjectId,
@@ -14,4 +13,4 @@ const WishlistSchema= mongoose.Schema({
         required: true
     }
 })
-module.exports=mongoose.model("wishlist",WishlistSchema)
+module.exports=mongoose.model("wishlists",WishlistSchema)

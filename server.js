@@ -28,6 +28,7 @@ require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
 // require("./app/routes/cart.routes")(app);
 app.use('/api/cart', require('./app/routes/cart.routes'))
+app.use('/api/wishlist', require('./app/routes/wishlist.routes'))
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
