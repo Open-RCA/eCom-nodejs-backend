@@ -16,7 +16,7 @@ router.post('/add',(req,res)=>{
     let newCart = new Cart({
         user_id: req.body.user_id,
         product_id: req.body.product_id,
-        date: Date.now
+        date: req.body.date
     })
 
     newCart.save()
