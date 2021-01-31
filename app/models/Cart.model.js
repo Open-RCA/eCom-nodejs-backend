@@ -2,16 +2,15 @@ const mongoose = require('mongoose')
 
 const CartSchema= mongoose.Schema({
     user_id: {
-        type: mongoose.Types.ObjectId,
-        required: true
+        type: String,
+        required: false
     },
     product_id: {
-        type: mongoose.Types.ObjectId,
-        required: true
+        type: String,
+        required: false
     },
     date:{
-        type: Date,
-        required: true
+        type: Date
     }
 })
 module.exports=mongoose.model("cart",CartSchema)
