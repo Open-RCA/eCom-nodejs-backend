@@ -2,11 +2,11 @@ const mongoose = require('mongoose')
 
 const CartSchema= mongoose.Schema({
     user_id: {
-        type: String,
+        type: mongoose.Types.ObjectId,
         required: false
     },
     product_id: {
-        type: String,
+        type: mongoose.Types.ObjectId,
         required: false
     },
     date:{
