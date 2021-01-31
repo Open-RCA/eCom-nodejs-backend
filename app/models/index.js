@@ -13,3 +13,4 @@ db.wishlist = require("./Wishlist.model");
 db.ROLES = ["user", "admin"];
 
 module.exports = db;
+
