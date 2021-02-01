@@ -2,15 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const db = require('./app/config/db.config')
-
+const productRoutes=require('./app/routes/productRoute')
+const userRoutes=require('./app/routes/user.routes')
+const rateRoutes=require('./app/routes/ratingRoute')
+const authRoutes=require('./app/routes/auth.routes')
+const authJwt = require("./app/middlewares/authJwt")
 const app = express();
 
 
-let corsOptions = {
-    origin: "http://localhost:8081"
-}
-
-app.use(cors(corsOptions));
+app.use(cors());
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
@@ -24,8 +24,14 @@ app.get('/', (req, res) => {
 })
 
 // routes
-require("./app/routes/auth.routes")(app);
-require("./app/routes/user.routes")(app);
+
+ app.use("/api/users/", userRoutes);
+ app.use('/api/products/',productRoutes)
+ app.use('/api/rating/',rateRoutes)
+ app.use('/api/auth/',authRoutes)
+
+// app.use("/api/products",productRoutes)
+
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

@@ -1,34 +1,29 @@
 {
-  "name": "e-commerce",
+  "name": "open-rca",
   "version": "1.0.0",
-  "description": "e-commerce project",
-  "main": "index.js",
+  "description": "open rca project",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "nodemon server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Open-RCA/eCom-nodejs-backend-2.git"
+    "url": "open-rca"
   },
-  "keywords": [
-    "nodejs",
-    "express",
-    "javascript",
-    "e-commerce"
-  ],
-  "author": "The bosses",
+  "author": "hortance-irakoze",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Open-RCA/eCom-nodejs-backend-2/issues"
-  },
-  "homepage": "https://github.com/Open-RCA/eCom-nodejs-backend-2#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "global": "^4.4.0",
+    "joi": "^17.3.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.11.13"
+    "mongoose": "^5.11.13",
+    "multer": "^1.4.2",
+    "nodemon": "^2.0.7",
+    "path": "^0.12.7"
   }
 }
