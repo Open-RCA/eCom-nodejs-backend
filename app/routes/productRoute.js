@@ -1,7 +1,6 @@
 const express=require('express')
 const  productController=require('../controllers/productController')
 const router=express.Router()
-router.get('/getProductById/:id',productController.getProductById)
 router.get('/getAll',productController.getProducts)
 router.post('/addNewProduct',[productController.upload.array('productImages'),productController.createProduct])
 router.get('/getCategoryById/:catId',productController.getByCategory)
