@@ -4,10 +4,7 @@ const Joi=require('joi');
 const Schema=mongoose.Schema
 
 const ProductSchema=new Schema({
-    proId:{
-        type:String,
-        required:true
-    },
+
     proName:{
         type:String,
         required:true
@@ -16,7 +13,7 @@ const ProductSchema=new Schema({
         type:String,
         required:true
     },
-    quantity:{
+    quantityInStock:{
         type:Number,
         required:true
     },
@@ -48,10 +45,9 @@ const ProductSchema=new Schema({
 
 function validateProductSchema(Product) {
     const JoiSchema=Joi.object({
-        proId:Joi.string().required(),
         proName:Joi.string().required().max(20).min(2),
         catId:Joi.string().required(),
-        quantity:Joi.number().required(),
+        quantityInStock:Joi.number().required(),
         price:Joi.number().required(),
         description:Joi.string().required().max(20).min(2),
         review:Joi.string().required().max(20).min(2),

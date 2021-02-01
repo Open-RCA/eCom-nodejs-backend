@@ -92,7 +92,6 @@ unrate = async (req, res) => {
 }
 
 getRateByStars = async (req, res) => {
-    // console.log(req.params.stars, await Rate.find())
     await Rate.find({
         stars: req.params.stars
     }, (err, rate) => {
