@@ -1,11 +1,20 @@
-exports.allAccess = (req, res) => {
-  res.status(200).send("Public Content.");
-};
+const {authJwt}=require("../middlewares")
 
-exports.userBoard = (req, res) => {
-  res.status(200).send("User Content.");
-};
+allAccess=(req,res)  =>{
+  res.status(200).send("Public content")
 
-exports.adminBoard = (req, res) => {
-  res.status(200).send("Admin Content.");
-};
+}
+
+userBoard=(req,res)=>{
+  res.status(200).send("User content")
+}
+
+adminBoard=(req,res)=>{
+  res.status(200).send("Public content")
+}
+
+module.exports={
+  allAccess,
+  userBoard,
+  adminBoard
+}
