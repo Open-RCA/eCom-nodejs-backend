@@ -1,14 +1,13 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const db = require('./app/config/db.config')
-const productRoutes=require('./app/routes/productRoute')
-const userRoutes=require('./app/routes/user.routes')
-const rateRoutes=require('./app/routes/ratingRoute')
-const authRoutes=require('./app/routes/auth.routes')
-const authJwt = require("./app/middlewares/authJwt")
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const db = require("./app/config/db.config");
+const productRoutes = require("./app/routes/productRoute");
+const userRoutes = require("./app/routes/user.routes");
+const rateRoutes = require("./app/routes/ratingRoute");
+const authRoutes = require("./app/routes/auth.routes");
+const authJwt = require("./app/middlewares/authJwt");
 const app = express();
-
 
 app.use(cors());
 
@@ -18,20 +17,23 @@ app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
-app.get('/', (req, res) => {
-    res.send("Welcome to open rca's e-commerce")
-})
+app.get("/", (req, res) => {
+  res.send("Welcome to open rca's e-commerce");
+});
 
 // routes
 
- app.use("/api/users/", userRoutes);
- app.use('/api/products/',productRoutes)
- app.use('/api/rating/',rateRoutes)
- app.use('/api/auth/',authRoutes)
+app.use("/api/users/", userRoutes);
+app.use("/api/products/", productRoutes);
+app.use("/api/rating/", rateRoutes);
+app.use("/api/auth/", authRoutes);
+app.use("/api/category", require("./app/routes/category"));
+app.use("/api/subcategory", require("./app/routes/sub-categories"));
+app.use("/api/order", require("./app/routes/order.route"));
+app.use("/api/payment", require("./app/routes/payment.route"));
+app.use("/api/orderdetails", require("./app/routes/orderdetails.routes"));
 
 // app.use("/api/products",productRoutes)
-
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
