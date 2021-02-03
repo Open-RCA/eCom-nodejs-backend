@@ -1,17 +1,13 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const db = require('./app/config/db.config')
-const productRoutes=require('./app/routes/productRoute')
-const userRoutes=require('./app/routes/user.routes')
-const rateRoutes=require('./app/routes/ratingRoute')
-const authRoutes=require('./app/routes/auth.routes')
-const authJwt = require("./app/middlewares/authJwt")
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const db = require("./app/config/db.config");
+const productRoutes = require("./app/routes/productRoute");
+const userRoutes = require("./app/routes/user.routes");
+const rateRoutes = require("./app/routes/ratingRoute");
+const authRoutes = require("./app/routes/auth.routes");
+const authJwt = require("./app/middlewares/authJwt");
 const app = express();
-
-
-
-
 
 app.use(cors());
 
@@ -29,14 +25,13 @@ app.get("/", (req, res) => {
 // require("./app/routes/auth.routes")(app);
 // require("./app/routes/user.routes")(app);
 // require("./app/routes/cart.routes")(app);
-app.use('/api/cart', require('./app/routes/cart.routes'))
-app.use('/api/wishlist', require('./app/routes/wishlist.routes'))
+app.use("/api/cart", require("./app/routes/cart.routes"));
+app.use("/api/wishlist", require("./app/routes/wishlist.routes"));
 
- app.use("/api/users/", userRoutes);
- app.use('/api/products/',productRoutes)
- app.use('/api/rating/',rateRoutes)
- app.use('/api/auth/',authRoutes)
-
+app.use("/api/users/", userRoutes);
+app.use("/api/products/", productRoutes);
+app.use("/api/rating/", rateRoutes);
+app.use("/api/auth/", authRoutes);
 
 app.use("/api/category", require("./app/routes/category"));
 app.use("/api/subcategory", require("./app/routes/sub-categories"));
