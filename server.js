@@ -26,8 +26,8 @@ app.get("/", (req, res) => {
 });
 
 // routes
-require("./app/routes/auth.routes")(app);
-require("./app/routes/user.routes")(app);
+// require("./app/routes/auth.routes")(app);
+// require("./app/routes/user.routes")(app);
 // require("./app/routes/cart.routes")(app);
 app.use('/api/cart', require('./app/routes/cart.routes'))
 app.use('/api/wishlist', require('./app/routes/wishlist.routes'))
