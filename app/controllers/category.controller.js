@@ -1,6 +1,9 @@
 const Category = require("../models/Category.model");
 const SubCategory = require("../models/SubCategory.model");
+const { Product } = require("../models/productModel");
+const OrderDetails = require("../models/OrderDetails");
 const validator = require("validator");
+const mongoose = require("mongoose");
 
 const CategoryController = {
   getall(req, res) {
@@ -16,6 +19,42 @@ const CategoryController = {
   getSub(req, res) {
     SubCategory.find({ categoryId: req.params.categoryId })
       .then((subcats) => res.send(subcats))
+      .catch((err) => console.log(err));
+  },
+  async getTop(req, res) {
+    //get 10 most ordered products
+    OrderDetails.aggregate([
+      {
+        $group: {
+          _id: "$productId",
+          count: { $sum: 1 },
+        },
+      },
+      { $sort: { count: -1 } },
+      { $limit: 10 },
+    ])
+      .then(async (prods) => {
+        let i;
+        let temp = [];
+        let data = [];
+
+        //get all category ids
+        for (i = 0; i < prods.length; i++) {
+          await Product.findById(prods[i]._id, "catId")
+            .then((prod) => temp.push(mongoose.Types.ObjectId(prod.catId)))
+            .catch((err) => console.log(err));
+        }
+
+        //get category details
+        for (i = 0; i < temp.length; i++) {
+          await Category.findById(temp[i])
+            .then((cat) => data.push(cat))
+            .catch((err) => console.log(err));
+        }
+
+        //send top categories
+        res.send(data);
+      })
       .catch((err) => console.log(err));
   },
   newCategory(req, res) {
