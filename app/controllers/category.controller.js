@@ -37,7 +37,7 @@ const CategoryController = {
         let i;
         let temp = [];
         let data = [];
-        console.log(prods);
+
         //get all category ids from subcategories of products
         for (i = 0; i < prods.length; i++) {
           await Product.findById(prods[i]._id, "catId")
