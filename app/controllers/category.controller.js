@@ -31,24 +31,32 @@ const CategoryController = {
         },
       },
       { $sort: { count: -1 } },
-      { $limit: 10 },
+      { $limit: 50 },
     ])
       .then(async (prods) => {
         let i;
         let temp = [];
         let data = [];
-
-        //get all category ids
+        console.log(prods);
+        //get all category ids from subcategories of products
         for (i = 0; i < prods.length; i++) {
           await Product.findById(prods[i]._id, "catId")
-            .then((prod) => temp.push(mongoose.Types.ObjectId(prod.catId)))
+            .then(async (prod) => {
+              await SubCategory.findById(prod.catId)
+                .then((subcat) => temp.push(subcat.categoryId))
+                .catch((err) => console.log(err));
+            })
             .catch((err) => console.log(err));
         }
 
         //get category details
         for (i = 0; i < temp.length; i++) {
           await Category.findById(temp[i])
-            .then((cat) => data.push(cat))
+            .then((cat) => {
+              if (!data.find((x) => String(x._id) === String(cat._id))) {
+                data.push(cat);
+              }
+            })
             .catch((err) => console.log(err));
         }
 

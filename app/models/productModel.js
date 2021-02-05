@@ -9,7 +9,8 @@ const ProductSchema = new Schema({
     required: true,
   },
   catId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "sub-categories",
     required: true,
   },
   quantityInStock: {
