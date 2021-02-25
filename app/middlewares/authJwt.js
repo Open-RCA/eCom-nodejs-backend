@@ -5,12 +5,13 @@ const User = db.user;
 const Role = db.role;
 
 
-verifyToken = (req, res, next) => {
-    let token = req.headers.authorization;
+const verifyToken = (req, res, next) => {
+  let token = req.headers.authorization.split(" ")[1];
   
-    if (!token) {
-      return res.status(403).send({ message: "No token provided!" });
-    }
+  if (!token) {
+    return res.status(403).send({ message: "No token provided!" });
+  }
+
   
     jwt.verify(token, config.secret, (err, decoded) => {
       if (err) {
@@ -22,16 +23,16 @@ verifyToken = (req, res, next) => {
   };
 
 
-  isAdmin = (req, res, next) => {
+  const isAdmin = async(req, res, next) => {
     User.findById(req.userId).exec((err, user) => {
       if (err) {
         res.status(500).send({ message: err });
         return;
       }
   
-      Role.find(
+      Role.findOne(
         {
-          _id: { $in: user.roles }
+          _id:  user.userRole
         },
         (err, roles) => {
           if (err) {
@@ -39,12 +40,12 @@ verifyToken = (req, res, next) => {
             return;
           }
   
-          for (let i = 0; i < roles.length; i++) {
-            if (roles[i].name === "admin") {
+            console.log("role: ", roles._doc.name)
+            
+            if (roles._doc.name === "admin") {
               next();
               return;
             }
-          }
   
           res.status(403).send({ message: "Require Admin Role!" });
           return;
@@ -53,7 +54,7 @@ verifyToken = (req, res, next) => {
     });
   };
 
-  isUser = (req, res, next) => {
+  const isUser = (req, res, next) => {
     User.findById(req.userId).exec((err, user) => {
       if (err) {
         res.status(500).send({ message: err });
@@ -71,7 +72,7 @@ verifyToken = (req, res, next) => {
           }
   
           
-            if (role.name === "user") {
+            if (role._doc.name === "user") {
               next();
               return;
             }
