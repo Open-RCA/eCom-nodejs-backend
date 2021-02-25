@@ -58,5 +58,5 @@ function validateProductSchema(Product) {
 return JoiSchema.validate(Product)
    
 }
-module.exports.Product=mongoose.model('Product',ProductSchema)
+module.exports.Product=mongoose.model('product',ProductSchema)
 module.exports.validateProductSchema=validateProductSchema

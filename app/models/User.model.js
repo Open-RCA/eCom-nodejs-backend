@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const User = mongoose.model('User', 
+const User = mongoose.model('user', 
 
     new mongoose.Schema({
         fullName: String,
@@ -9,7 +9,7 @@ const User = mongoose.model('User',
         password: String,
         userRole: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Roles"
+            ref: "roles"
         }    })
 )
 

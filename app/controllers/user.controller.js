@@ -1,4 +1,3 @@
-const {authJwt}=require("../middlewares")
 
 allAccess=(req,res)  =>{
   res.status(200).send("Public content")
@@ -10,7 +9,7 @@ userBoard=(req,res)=>{
 }
 
 adminBoard=(req,res)=>{
-  res.status(200).send("Public content")
+  res.status(200).send("Admin content")
 }
 
 module.exports={

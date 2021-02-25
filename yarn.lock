@@ -787,7 +787,7 @@ isarray@~1.0.0:
 
 joi@^17.3.0:
   version "17.3.0"
-  resolved "https://registry.yarnpkg.com/joi/-/joi-17.3.0.tgz"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-17.3.0.tgz#f1be4a6ce29bc1716665819ac361dfa139fff5d2"
   integrity sha512-Qh5gdU6niuYbUIUV5ejbsMiiFmBdw8Kcp8Buj2JntszCkCfxJ9Cz76OtHxOZMPXrt5810iDIXs+n1nNVoquHgg==
   dependencies:
     "@hapi/hoek" "^9.0.0"
@@ -991,10 +991,10 @@ mongoose-legacy-pluralize@1.0.2:
   resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz"
   integrity sha512-Yo/7qQU4/EyIS8YDFSeenIvXxZN+ld7YdV9LqFVQJzTLye8unujAWPZ4NWKfFA+RNjh+wvTWKY9Z3E5XM6ZZiQ==
 
-mongoose@^5.11.13:
-  version "5.11.14"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.11.14.tgz"
-  integrity sha512-sDI5/i1C9JD3ysDbVGqQG4N6vMC3ZOY7sH/bT63/+3vJub2Nys//JegL4y4iS7v8Vgvje3sNA3ladMSsVnv6TQ==
+mongoose@^5.11.14:
+  version "5.11.15"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.11.15.tgz#ee8ba751c83ee21f4b399aba7cb10276dd316320"
+  integrity sha512-8T4bT6eCGB7MqCm40oVhnhT/1AyAdwe+y1rYUhdl3ljsks3BpYz8whZgcMkIoh6VoCCjipOXRqZqdk1UByvlYA==
   dependencies:
     "@types/mongodb" "^3.5.27"
     bson "^1.1.4"
