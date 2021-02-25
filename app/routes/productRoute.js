@@ -1,9 +1,10 @@
 const express=require('express')
 const  productController=require('../controllers/productController')
+const authJwt = require('../middlewares/authJwt')
 const { verifyToken } = require('../middlewares/authJwt')
 const router=express.Router()
 
-router.get('/getAll',productController.getProducts)
+router.get('/getAll',[verifyToken,productController.getProducts])
 router.post('/addNewProduct',[verifyToken, authJwt.isAdmin, productController.upload.array('productImages'),productController.createProduct])
 router.get('/getCategoryById/:catId', productController.getByCategory)
 router.get('/getByproductName/:proName',productController.searchProduct)
