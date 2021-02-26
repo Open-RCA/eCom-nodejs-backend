@@ -3,13 +3,13 @@ const { Order, validateOrder } = require("../models/Order.model");
 const OrderController = {
   getall(req, res) {
     Order.find()
-      .then((orders) => res.send(orders))
-      .catch((err) => console.log(err));
+      .then((orders) => res.send({ success: true, data: orders }))
+      .catch((err) => res.send({ success: false, message: err.message }));
   },
   getByid(req, res) {
     Order.findById(req.params.id)
-      .then((orders) => res.send(orders))
-      .catch((err) => console.log(err));
+      .then((orders) => res.send({ success: true, data: orders }))
+      .catch((err) => res.send({ success: false, message: err.message }));
   },
   newOrder(req, res) {
     const { error } = validateOrder(req.body);

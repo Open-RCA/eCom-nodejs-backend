@@ -5,16 +5,17 @@ const User = db.user;
 const Role = db.role;
 
 
-verifyToken = (req, res, next) => {
-    let token = req.headers["x-access-token"];
+const verifyToken = (req, res, next) => {
+  let token = req.headers.authorization.split(" ")[1];
   
-    if (!token) {
-      return res.status(403).send({ message: "No token provided!" });
-    }
+  if (!token) {
+    return res.status(403).send({ message: "No token provided!" });
+  }
+
   
     jwt.verify(token, config.secret, (err, decoded) => {
       if (err) {
-        return res.status(401).send({ message: "Unauthorized!" });
+        return res.status(401).send({ message: err.message });I
       }
       req.userId = decoded.id;
       next();
@@ -22,38 +23,36 @@ verifyToken = (req, res, next) => {
   };
 
 
-  isAdmin = (req, res, next) => {
+  const isAdmin = async(req, res, next) => {
     User.findById(req.userId).exec((err, user) => {
       if (err) {
         res.status(500).send({ message: err });
         return;
       }
   
-      Role.find(
+      Role.findOne(
         {
-          _id: { $in: user.roles }
+          _id:  user.userRole
         },
         (err, roles) => {
           if (err) {
             res.status(500).send({ message: err });
             return;
           }
-  
-          for (let i = 0; i < roles.length; i++) {
-            if (roles[i].name === "admin") {
+            
+            if (roles._doc.name.toLowerCase() === "admin") {
               next();
               return;
             }
-          }
   
-          res.status(403).send({ message: "Require Admin Role!" });
+          res.status(403).send({ message: "Requires Admin Role!" });
           return;
         }
       );
     });
   };
 
-  isUser = (req, res, next) => {
+  const isUser = (req, res, next) => {
     User.findById(req.userId).exec((err, user) => {
       if (err) {
         res.status(500).send({ message: err });
@@ -71,7 +70,7 @@ verifyToken = (req, res, next) => {
           }
   
           
-            if (role.name === "user") {
+            if (role._doc.name.toLowerCase() === "user") {
               next();
               return;
             }

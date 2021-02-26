@@ -3,8 +3,8 @@ const Wishlist = require('../models/Wishlist.model')
 const WishlistController = {
     getWishlist(req,res){
         Wishlist.find()
-        .then(wishlist=> res.send(wishlist))
-        .catch(err=> console.log(err))
+        .then(wishlist=> res.send({success: true, data: wishlist}))
+        .catch(err=> res.send({success: false, message: err.message}))
     },
 
     postWishlist(req,res){
@@ -15,15 +15,15 @@ const WishlistController = {
             })
         
             newWishlist.save()
-            .then(wishlist => res.send(wishlist))
-            .catch(err => console.log(err))
+            .then(wishlist => res.send({success: true, data:wishlist}))
+            .catch(err => res.send({success: false, message: err.message}))
     },
 
     deleteWishlist(req,res)
     {
         Wishlist.findByIdAndDelete(req.params.id)
-        .then(wishlist => res.send(wishlist))
-        .catch(err => console.log(err))
+        .then(wishlist => res.send({success: true, data:wishlist}))
+        .catch(err => res.send({success: false, message: err.message}))
     }
 }
 module.exports = WishlistController

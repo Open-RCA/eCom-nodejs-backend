@@ -1,38 +1,48 @@
 const db = require("../models");
-const ROLES = db.ROLES;
 const User = db.user;
+const Role = db.role;
+const mongoose = require("mongoose");
 
 const checkDuplicateEmail = (req, res, next) => {
     User.findOne({
         email: req.body.email
     }).exec((err, user) => {
         if (err){
-            res.status(500).send({message: err.message});
-
-            return
+            return res.status(500).send({message: err.message});
         }
 
         if (user){
-            res.status(200).send({message: "Failed! Email is already in use!"})
+            return res.status(200).send({message: "Failed! Email is already in use!"})
         }
 
         next();
     })
 }
 
-checkRolesExisted = (req, res, next) => {
-    // if (req.body.role) {
-    //   console.log("here", !(ROLES.includes(req.body.role)))
-    //     if (!(ROLES.includes(req.body.role))) {
-    //       res.status(400).send({
-    //         message: `Failed! Role ${req.body.role} does not exist!`
-    //       });
-    //       return;
-    //     }
-      
-    // }
+checkRolesExisted = async(req, res, next) => {
+const isvalid = await mongoose.Types.ObjectId.isValid(req.body.userRole);
+  if(!isvalid){
+    return res.send({ message: "ID must be a valid mongoose object id"})
+  }
   
-    next();
+    if (req.body.userRole) {
+     
+      await Role.findById(req.body.userRole)
+      .then((role) => {
+      if(!role){
+        return res.status(404).send({message: `Failed! Role ${req.body.userRole} does not exist!`})
+      }else{
+      next();
+    }
+    })
+    .catch((err) => {
+        return res.status(400).send({
+        message: err.message
+      });
+    })
+      
+    }
+    
   };
 
   const verifySignUp = {

@@ -1,7 +1,5 @@
-const mongoose = require('mongoose')
 const express = require('express')
 const router = express.Router()
-const validator = require('validator')
 const WishlistController = require('../controllers/wishlist.controller')
 
 //read from Wishlist

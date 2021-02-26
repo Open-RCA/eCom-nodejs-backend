@@ -31,5 +31,5 @@ function validatedRate(Rate) {
 return JoiSchema.validate(Rate)
 }
 
-module.exports.Rate=mongoose.model('Rate',Rate)
+module.exports.Rate=mongoose.model('rate',Rate)
 module.exports.validatedRate=validatedRate

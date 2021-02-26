@@ -138,22 +138,19 @@ removeProduct = async (req, res) => {
             success: true,
             data: product
         })
-    }).catch(err => console.log(err))
+    }).catch(err => res.send({success: false, message: err.message}))
 }
 
 
 getProducts = (req, res) => {
     Product.find()
-        .then((docs) => {
-            if (docs.length <= 0) {
-                return res.status(400).send({
-                    success: false,
-                    error: 'Products not found'
-                })
+        .then((foundProducts) => {
+            if (foundProducts.length <= 0) {
+                return res.status(400).send(foundProducts)
             } else {
                 return res.status(200).send({
                     success: true,
-                    data: docs
+                    data: foundProducts
                 })
             }
         }).catch(e => {
