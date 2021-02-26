@@ -15,7 +15,7 @@ const verifyToken = (req, res, next) => {
   
     jwt.verify(token, config.secret, (err, decoded) => {
       if (err) {
-        return res.status(401).send({ message: "Unauthorized!" });
+        return res.status(401).send({ message: err.message });I
       }
       req.userId = decoded.id;
       next();
@@ -39,15 +39,13 @@ const verifyToken = (req, res, next) => {
             res.status(500).send({ message: err });
             return;
           }
-  
-            console.log("role: ", roles._doc.name)
             
-            if (roles._doc.name === "admin") {
+            if (roles._doc.name.toLowerCase() === "admin") {
               next();
               return;
             }
   
-          res.status(403).send({ message: "Require Admin Role!" });
+          res.status(403).send({ message: "Requires Admin Role!" });
           return;
         }
       );
@@ -72,7 +70,7 @@ const verifyToken = (req, res, next) => {
           }
   
           
-            if (role._doc.name === "user") {
+            if (role._doc.name.toLowerCase() === "user") {
               next();
               return;
             }

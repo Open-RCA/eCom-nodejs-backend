@@ -138,7 +138,7 @@ removeProduct = async (req, res) => {
             success: true,
             data: product
         })
-    }).catch(err => console.log(err))
+    }).catch(err => res.send({success: false, message: err.message}))
 }
 
 
