@@ -10,8 +10,8 @@ router.get("/", verifyToken, PaymentsController.getall);
 router.get("/:id", verifyToken, PaymentsController.getByid);
 
 //add payment
-router.post("/newpayment", verifyToken, PaymentsController.addPayment);
+router.post("/new", verifyToken, PaymentsController.addPayment);
 
 //delete payment
-router.delete("/remove/:id", verifyToken, PaymentsController.deletePayment);
+router.delete("/:id", verifyToken, PaymentsController.deletePayment);
 module.exports = router;

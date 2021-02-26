@@ -1,9 +1,8 @@
 const Category = require("../models/Category.model");
 const SubCategory = require("../models/SubCategory.model");
 const { Product } = require("../models/productModel");
-const OrderDetails = require("../models/OrderDetails");
+const { OrderDetails } = require("../models/OrderDetails");
 const validator = require("validator");
-const mongoose = require("mongoose");
 
 const CategoryController = {
   getall(req, res) {
@@ -66,12 +65,24 @@ const CategoryController = {
       .catch((err) => console.log(err));
   },
   newCategory(req, res) {
+    const errors = {};
     if (!validator.isLength(req.body.name, { min: 5, max: 30 })) {
-      return res.send({ name: "Length must be between 5 and 30" });
+      errors.name = "Length must be between 5 and 30";
+      return res.send(errors);
     }
-    Category.create({ name: req.body.name })
-      .then((cart) => res.send(cart))
-      .catch((err) => console.log(err));
+    Category.findOne({ name: req.body.name }).then((cat) => {
+      if (cat) {
+        //update category
+        Category.findByIdAndUpdate(cat._id, { name: req.body.name })
+          .then((newcat) => res.status(200).send({ success: true }))
+          .catch((err) => console.log(err));
+        return;
+      }
+
+      Category.create({ name: req.body.name })
+        .then((category) => res.send({ category: category, success: true }))
+        .catch((err) => console.log(err));
+    });
   },
   updateCat(req, res) {
     Category.findByIdAndUpdate(
@@ -79,12 +90,16 @@ const CategoryController = {
       { name: req.body.name },
       { new: true }
     )
-      .then((cat) => res.send(cat))
+      .then((cat) => {
+        if (cat) return res.status(200).send({ category: cat, success: true });
+        res.status(400).send("Category doesn't exist.");
+      })
       .catch((err) => console.log(err));
   },
   removeCat(req, res) {
     Category.findByIdAndDelete(req.params.id)
       .then((cat) => {
+        if (!cat) return res.send("Category doesn't exist.");
         SubCategory.deleteMany({ categoryId: req.params.id })
           .then((subs) => res.send({ success: true }))
           .catch((err) => console.log(err));
