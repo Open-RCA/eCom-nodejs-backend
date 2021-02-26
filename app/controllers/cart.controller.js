@@ -3,8 +3,8 @@ const Cart = require('../models/Cart.model')
 const CartController = {
     getCart(req,res){
         Cart.find()
-        .then(cart=> res.send(cart))
-        .catch(err=> console.log(err))
+        .then(cart=> res.send({success: true, data: cart}))
+        .catch(err=> res.send({success: false, message: err.message}))
     },
 
     postCart(req,res){
@@ -15,15 +15,15 @@ const CartController = {
             })
         
             newCart.save()
-            .then(cart => res.send(cart))
-            .catch(err => console.log(err))
+            .then(cart => res.send({success: true, data: cart}))
+            .catch(err => res.send({success: false, message: err.message}))
     },
 
     deleteCart(req,res)
     {
         Cart.findByIdAndDelete(req.params.id)
-        .then(cart => res.send(cart))
-        .catch(err => console.log(err))
+        .then(cart => res.send({success: true, data:cart}))
+        .catch(err => res.send({success: false, message: err.message}))
     }
 }
 module.exports = CartController

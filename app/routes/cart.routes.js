@@ -1,8 +1,5 @@
-const mongoose = require('mongoose')
-const Cart = require('../models/Cart.model')
 const express = require('express')
-const router = express.Router()
-const validator = require('validator')
+const router = express.Router();
 const CartController = require('../controllers/cart.controller')
 
 //read from cart

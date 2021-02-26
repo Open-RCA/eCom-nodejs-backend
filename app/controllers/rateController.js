@@ -88,7 +88,7 @@ unrate = async (req, res) => {
             success: true,
             data: rate
         })
-    }).catch(err => console.log(err))
+    }).catch(err => res.send({success: false, message: err.message}))
 }
 
 getRateByStars = async (req, res) => {
@@ -112,7 +112,7 @@ getRateByStars = async (req, res) => {
             success: true,
             data: rate
         })
-    }).catch(err => console.log(err))
+    }).catch(err => res.send({success: false, message: err.message}))
 }
 
 getRates = (req, res) => {
