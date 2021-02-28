@@ -12,12 +12,12 @@ router.get("/:id", SubController.getBYid);
 //get all products in subcategory
 
 //register sub-category
-router.post("/new", verifyToken, isAdmin, SubController.addNew);
+router.post("/new", verifyToken, SubController.addNew);
 
 //update sub-category
-router.put("/update/:id", verifyToken, isAdmin, SubController.updateSub);
+router.put("/update/:id", verifyToken, SubController.updateSub);
 
 //delete sub-category
-router.delete("/:id", verifyToken, isAdmin, SubController.deleteSub);
+router.delete("/:id", verifyToken, SubController.deleteSub);
 
 module.exports = router;
