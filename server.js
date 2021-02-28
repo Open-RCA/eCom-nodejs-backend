@@ -20,21 +20,21 @@ app.get("/", (req, res) => {
 });
 
 // routes
-const baseUrlRoutes = "/api/";
-app.use(`${baseUrlRoutes}cart`, require("./app/routes/cart.routes"));
-app.use(`${baseUrlRoutes}wishlist`, require("./app/routes/wishlist.routes"));
+const baseUrlRoute = "/api/";
+app.use(`${baseUrlRoute}cart`, require("./app/routes/cart.routes"));
+app.use(`${baseUrlRoute}wishlist`, require("./app/routes/wishlist.routes"));
 
-app.use(`${baseUrlRoutes}users/`, userRoutes);
-app.use(`${baseUrlRoutes}products/`, productRoutes);
-app.use(`${baseUrlRoutes}rating/`, rateRoutes);
-app.use(`${baseUrlRoutes}auth/`, authRoutes);
+app.use(`${baseUrlRoute}users/`, userRoutes);
+app.use(`${baseUrlRoute}products/`, productRoutes);
+app.use(`${baseUrlRoute}rating/`, rateRoutes);
+app.use(`${baseUrlRoute}auth/`, authRoutes);
 
-app.use(`${baseUrlRoutes}category`, require("./app/routes/category"));
-app.use(`${baseUrlRoutes}subcategory`, require("./app/routes/sub-categories"));
-app.use(`${baseUrlRoutes}order`, require("./app/routes/order.route"));
-app.use(`${baseUrlRoutes}payment`, require("./app/routes/payment.route"));
+app.use(`${baseUrlRoute}category`, require("./app/routes/category"));
+app.use(`${baseUrlRoute}subcategory`, require("./app/routes/sub-categories"));
+app.use(`${baseUrlRoute}order`, require("./app/routes/order.route"));
+app.use(`${baseUrlRoute}payment`, require("./app/routes/payment.route"));
 app.use(
-  `${baseUrlRoutes}orderdetails`,
+  `${baseUrlRoute}orderdetails`,
   require("./app/routes/orderdetails.routes")
 );
 

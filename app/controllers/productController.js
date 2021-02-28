@@ -1,11 +1,9 @@
 const multer = require('multer')
-const express = require('express')
+
 const {
     Product,
     validateProductSchema
 } = require('../models/productModel')
-const dbConfig = require('../config/db.config')
-const path = require('path')
 
 const storage = multer.diskStorage({
     destination: async function (req, file, cb) {
@@ -16,12 +14,6 @@ const storage = multer.diskStorage({
     },
 })
 
-const docFilter = (req, file, cb) => {
-    if (!file.originalname.match(/\.(jpeg|jpg|png)$/)) {
-        return cb(new Error('You can only upload document file!'), false);
-    }
-    cb(null, true);
-}
 
 const upload = multer({
     storage: storage
@@ -153,7 +145,7 @@ getProducts = (req, res) => {
                     data: foundProducts
                 })
             }
-        }).catch(e => {
+        }).catch(() => {
             return res.status(400).send({
                 success: false,
                 message: "something went wrong!"
@@ -177,7 +169,7 @@ getByCategory = (req, res) => {
                     products: docs
                 })
             }
-        }).catch(e => {
+        }).catch(() => {
             return res.status(400).send({
                 success: false,
                 message: 'Something went wrong!'
@@ -201,7 +193,7 @@ searchProduct = (req, res) => {
                     data: docs
                 })
             }
-        }).catch(e => {
+        }).catch(() => {
             return res.status(400).json({
                 success: false,
                 message: 'Something went wrong!'
@@ -229,7 +221,7 @@ getLatest = (req, res) => {
                     latest: docs
                 })
             }
-        }).catch(e => {
+        }).catch(() => {
             return res.status(400).json({
                 success: false,
                 message: 'Something went wrong'

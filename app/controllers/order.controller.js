@@ -37,11 +37,8 @@ const OrderController = {
   },
   deleteOrder(req, res) {
     Order.findByIdAndDelete(req.params.id)
-      .then((ord) => {
-        if (ord) return res.send("Deleted");
-        res.send("Order doesn't exist");
-      })
-      .catch((err) => console.log(err));
+      .then((ord) => res.send({success: true , message:"Order Deleted"}))
+      .catch((err) => res.send({success: false, message: err.message}));
   },
 };
 

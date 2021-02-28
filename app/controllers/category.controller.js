@@ -74,7 +74,7 @@ const CategoryController = {
   },
   newCategory(req, res) {
     const errors = {};
-    if (!validator.isLength(req.body.name, { min: 5, max: 30 })) {
+    if (!validator.isLength(req.body.name, { min: 1, max: 30 })) {
       errors.name = "Length must be between 5 and 30";
       return res.send(errors);
     }

@@ -19,15 +19,6 @@ router.get("/subcats/:categoryId", CategoryController.getSub);
 //search product in categories
 
 //add category
-<<<<<<< HEAD
-router.post("/new", verifyToken, CategoryController.newCategory);
-
-//update category
-router.put("/update/:id", verifyToken, CategoryController.updateCat);
-
-//delete category and all the subcategories
-router.delete("/:id", verifyToken, CategoryController.removeCat);
-=======
 router.post("/new", [verifyToken, isAdmin, CategoryController.newCategory]);
 
 //update category
@@ -35,6 +26,5 @@ router.put("/update/:id", [verifyToken, isAdmin, CategoryController.updateCat]);
 
 //delete category and all the subcategories
 router.delete("/:id", [verifyToken, isAdmin, CategoryController.removeCat]);
->>>>>>> 64c6cc205e1d905f82ae1b8a39d6fd86f4058df7
 
 module.exports = router;
