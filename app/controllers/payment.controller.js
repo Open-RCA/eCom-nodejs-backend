@@ -17,7 +17,7 @@ const PaymentsController = {
     Payments.findOne({ payment_type: req.body.payment_type }).then((paym) => {
       if (paym) {
         //update
-        Payments.findByIdAndUpdate(paym._id, { $set: req.body })
+        Payments.findByIdAndUpdate(paym._id, { $set: req.body }, { new: true })
           .then((done) => res.send(done))
           .catch((err) => console.log(err));
 
