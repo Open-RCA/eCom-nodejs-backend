@@ -21,7 +21,7 @@ const OrderController = {
   },
   deleteOrder(req, res) {
     Order.findByIdAndDelete(req.params.id)
-      .then((ord) => res.send("Deleted"))
+      .then((ord) => res.send({success: true , message:"Order Deleted"}))
       .catch((err) => res.send({success: false, message: err.message}));
   },
 };

@@ -2,7 +2,9 @@ const db=require("../models")
 const Rate=db.rate
 const dbConfig=require('../config/db.config')
 
-RateProduct =  (req, res) => {
+const RatingController = {
+
+RateProduct (req, res)  {
     let body = req.body
     if (!body) {
         return res.status(400).json({
@@ -24,10 +26,10 @@ RateProduct =  (req, res) => {
                 rate:newRate,
                 message: 'Thank you for your review'
             })
-        }
+},
 
 
-updateRate = async (req, res) => {
+async updateRate (req, res)  {
     const body = req.body
 
     if (!body) {
@@ -64,9 +66,9 @@ updateRate = async (req, res) => {
             })
 
         },
-    )}
+    )},
 
-unrate = async (req, res) => {
+    async unrate  (req, res) {
     await Rate.findByIdAndDelete({
         _id: req.params.id
     }, (err, rate) => {
@@ -89,9 +91,9 @@ unrate = async (req, res) => {
             data: rate
         })
     }).catch(err => res.send({success: false, message: err.message}))
-}
+},
 
-getRateByStars = async (req, res) => {
+async getRateByStars (req, res) {
     await Rate.find({
         stars: req.params.stars
     }, (err, rate) => {
@@ -113,9 +115,9 @@ getRateByStars = async (req, res) => {
             data: rate
         })
     }).catch(err => res.send({success: false, message: err.message}))
-}
+},
 
-getRates = (req, res) => {
+async getRates (req, res) {
     Rate.find()
         .then((docs) => {
             if (docs.length <=0) {
@@ -136,10 +138,6 @@ getRates = (req, res) => {
             })
         })
 }
-module.exports = {
-    RateProduct,
-    updateRate,
-    unrate,
-    getRateByStars,
-    getRates
 }
+
+module.exports = RatingController;
