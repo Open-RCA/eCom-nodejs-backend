@@ -28,7 +28,11 @@ const DetailsController = {
         }).then((odetails) => {
           if (odetails) {
             //update
-            OrderDetails.findByIdAndUpdate(odetails._id, { $set: req.body })
+            OrderDetails.findByIdAndUpdate(
+              odetails._id,
+              { $set: req.body },
+              { new: true }
+            )
               .then((updated) => res.send(updated))
               .catch((err) => console.log(err));
             return;

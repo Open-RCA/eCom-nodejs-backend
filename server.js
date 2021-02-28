@@ -1,12 +1,11 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const productRoutes=require('./app/routes/productRoute')
-const userRoutes=require('./app/routes/user.routes')
-const rateRoutes=require('./app/routes/ratingRoute')
-const authRoutes=require('./app/routes/auth.routes')
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const productRoutes = require("./app/routes/productRoute");
+const userRoutes = require("./app/routes/user.routes");
+const rateRoutes = require("./app/routes/ratingRoute");
+const authRoutes = require("./app/routes/auth.routes");
 const app = express();
-
 
 app.use(cors());
 
@@ -22,20 +21,22 @@ app.get("/", (req, res) => {
 
 // routes
 const baseUrlRoute = "/api/";
-app.use(`${baseUrlRoute}cart`, require('./app/routes/cart.routes'))
-app.use(`${baseUrlRoute}wishlist`, require('./app/routes/wishlist.routes'))
+app.use(`${baseUrlRoute}cart`, require("./app/routes/cart.routes"));
+app.use(`${baseUrlRoute}wishlist`, require("./app/routes/wishlist.routes"));
 
- app.use(`${baseUrlRoute}users/`, userRoutes);
- app.use(`${baseUrlRoute}products/`,productRoutes)
- app.use(`${baseUrlRoute}rating/`,rateRoutes)
- app.use(`${baseUrlRoute}auth/`,authRoutes)
-
+app.use(`${baseUrlRoute}users/`, userRoutes);
+app.use(`${baseUrlRoute}products/`, productRoutes);
+app.use(`${baseUrlRoute}rating/`, rateRoutes);
+app.use(`${baseUrlRoute}auth/`, authRoutes);
 
 app.use(`${baseUrlRoute}category`, require("./app/routes/category"));
 app.use(`${baseUrlRoute}subcategory`, require("./app/routes/sub-categories"));
 app.use(`${baseUrlRoute}order`, require("./app/routes/order.route"));
 app.use(`${baseUrlRoute}payment`, require("./app/routes/payment.route"));
-app.use(`${baseUrlRoute}orderdetails`, require("./app/routes/orderdetails.routes"));
+app.use(
+  `${baseUrlRoute}orderdetails`,
+  require("./app/routes/orderdetails.routes")
+);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
