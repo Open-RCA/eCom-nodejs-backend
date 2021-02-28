@@ -1,4 +1,8 @@
-const SubCategory = require("../models/SubCategory.model");
+const {
+  SubCategory,
+  validateSubCategory,
+} = require("../models/SubCategory.model");
+const Category = require("../models/Category.model");
 const validator = require("validator");
 
 const SubController = {

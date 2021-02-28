@@ -1,12 +1,12 @@
 const express = require('express')
-const rateController = require('../controllers/rateController')
+const RateController = require('../controllers/RateController')
 const { verifyToken } = require('../middlewares/authJwt')
 const router = express.Router()
 
-router.post('/rate', [verifyToken, rateController.RateProduct])
-router.get('/', [verifyToken, rateController.getRates])
-router.get('/:stars', [verifyToken,rateController.getRateByStars])
-router.delete('/:id', [verifyToken, rateController.unrate])
-router.put('/:id', [verifyToken, rateController.updateRate])
+router.post('/rate', [verifyToken, RateController.RateProduct])
+router.get('/', [verifyToken, RateController.getRates])
+router.get('/:stars', [verifyToken,RateController.getRateByStars])
+router.delete('/:id', [verifyToken, RateController.unrate])
+router.put('/:id', [verifyToken, RateController.updateRate])
 
 module.exports = router

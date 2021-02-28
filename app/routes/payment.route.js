@@ -14,4 +14,5 @@ router.post("/newpayment", [verifyToken, PaymentsController.addPayment]);
 
 //delete payment
 router.delete("/remove/:id", [verifyToken, PaymentsController.deletePayment]);
+
 module.exports = router;

@@ -1,15 +1,17 @@
 const express = require("express");
 const router = express.Router();
 const CategoryController = require("../controllers/category.controller");
+
 const { verifyToken, isAdmin } = require("../middlewares/authJwt");
 
 //get all categories
 router.get("/", CategoryController.getall);
 
 //get category by id
-router.get("/:id", CategoryController.getByid);
+router.get("/byid/:id", CategoryController.getByid);
 
 //get top categories
+router.get("/top", CategoryController.getTop);
 
 //get sub-categories
 router.get("/subcats/:categoryId", CategoryController.getSub);
