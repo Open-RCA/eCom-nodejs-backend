@@ -1,4 +1,7 @@
-const Cart = require('../models/Cart.model')
+const {
+    Cart,
+    validateCart,
+  } = require('../models/Cart.model')
 
 const CartController = {
     getCart(req,res){

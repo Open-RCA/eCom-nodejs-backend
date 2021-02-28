@@ -1,3 +1,4 @@
+const Joi = require('joi');
 const mongoose = require('mongoose')
 
 const CartSchema= mongoose.Schema({
@@ -14,3 +15,13 @@ const CartSchema= mongoose.Schema({
     }
 })
 module.exports=mongoose.model("cart",CartSchema)
+
+module.exports.validateCart = (CartSchema) => {
+    const JoiSchema = Joi.object({
+      user_id: Joi.objectId().required(),
+      product_id: Joi.objectId().required(),
+      date: Joi.date().required()
+    });
+  
+    return JoiSchema.validate(CartSchema);
+  };
