@@ -59,7 +59,7 @@ const SubController = {
     }
     SubCategory.findByIdAndUpdate(req.params.id, { name: req.body.name })
       .then((sub_cat) => {
-        if (sub_cat) return res.send(sub_cart);
+        if (sub_cat) return res.send({success: true, data: sub_cart});
         res.send("Subcategory doesn't exist.");
       })
       .catch((err) => console.log(err));
@@ -67,7 +67,7 @@ const SubController = {
   deleteSub(req, res) {
     SubCategory.findByIdAndDelete(req.params.id)
       .then((sub_cat) => {
-        if (sub_cat) return res.send({ success: true });
+        if (sub_cat) return res.send({ success: true, message: "Sub category deleted" });
         res.send("Subcategory doesn't exist.");
       })
       .catch((err) => console.log(err));
