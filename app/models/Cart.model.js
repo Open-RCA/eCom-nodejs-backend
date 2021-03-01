@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
+const Joi=require("joi")
 
-const CartSchema= mongoose.Schema({
+const Cart= mongoose.Schema({
     user_id: {
         type: mongoose.Types.ObjectId
     },
@@ -13,4 +14,14 @@ const CartSchema= mongoose.Schema({
         required: true
     }
 })
-module.exports=mongoose.model("cart",CartSchema)
+
+function validateCart(Cart){
+    const JoiSchema=Joi.object({
+        user_id:Joi.objectId().required(),
+        product_id:Joi.objectId().required(),
+        date:Joi.date().required(),
+    }).options({abortEarly:false});
+    return JoiSchema.validate(Cart)
+}
+module.exports.Cart=mongoose.model("Cart",Cart)
+module.exports.validateCart=validateCart

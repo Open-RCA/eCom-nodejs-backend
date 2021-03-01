@@ -1,4 +1,4 @@
-const Cart = require('../models/Cart.model')
+const {Cart,validateCart} = require('../models/Cart.model')
 
 const CartController = {
     getCart(req,res){
@@ -13,6 +13,16 @@ const CartController = {
                 product_id: req.body.product_id,
                 date: req.body.date
             })
+            if(!newCart){
+                return res.status(400).json({
+                    success:false,
+                    error:'You must provide valid info'
+                })
+            }
+
+            const {error}=validateCart(newCart)
+            if(error)
+                return res.status(400).send(error)
         
             newCart.save()
             .then(cart => res.send({success: true, data: cart}))
