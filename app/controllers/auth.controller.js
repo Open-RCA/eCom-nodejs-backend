@@ -14,7 +14,6 @@
 //     role: req.body.role
 //   });
 
-
 //   user.save((err, user) => {
 //     if (err) {
 //       res.status(500).send({ message: err });
@@ -96,7 +95,6 @@
 //         expiresIn: 86400 // 24 hours
 //       });
 
-
 //       res.status(200).send({
 //         id: user._id,
 //         fullName: user.fullName,
@@ -109,28 +107,30 @@
 
 const config = require("../config/auth.config");
 const db = require("../models");
-const User = db.user;
+const { User, validateUser } = db.user;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
-exports.signup = async(req, res) => {
+exports.signup = async (req, res) => {
+  const { error } = validateUser(req.body);
+  if (error) return res.status(400).send(error);
+
   const user = new User({
     fullName: req.body.fullName,
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8),
-    userRole: req.body.userRole
+    userRole: req.body.userRole,
   });
-           await user.save().then(() =>{
-
-            return res.status(201).send({ message: "User was registered successfully!" });
-          })
-            .catch(err =>{
-              
-              return res.status(500).send({ message: err });
-            
-            }) 
-
-
+  await user
+    .save()
+    .then(() => {
+      return res
+        .status(201)
+        .send({ message: "User was registered successfully!" });
+    })
+    .catch((err) => {
+      return res.status(500).send({ message: err });
+    });
 };
 
 exports.signin = (req, res) => {
@@ -156,21 +156,20 @@ exports.signin = (req, res) => {
       if (!passwordIsValid) {
         return res.status(401).send({
           accessToken: null,
-          message: "Invalid Password!"
+          message: "Invalid Password!",
         });
       }
 
       var token = jwt.sign({ id: user.id }, config.secret, {
-        expiresIn: 86400 // 24 hours
+        expiresIn: 86400, // 24 hours
       });
-
 
       res.status(200).send({
         id: user._id,
         fullName: user.fullName,
         email: user.email,
         role: req.body.role,
-        accessToken: token
+        accessToken: token,
       });
     });
 };

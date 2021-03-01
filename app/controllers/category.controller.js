@@ -2,7 +2,6 @@ const Category = require("../models/Category.model");
 const SubCategory = require("../models/SubCategory.model");
 const { Product } = require("../models/productModel");
 const { OrderDetails } = require("../models/OrderDetails");
-const validator = require("validator");
 
 const CategoryController = {
   getall(req, res) {
@@ -74,10 +73,16 @@ const CategoryController = {
   },
   newCategory(req, res) {
     const errors = {};
-    if (!validator.isLength(req.body.name, { min: 1, max: 30 })) {
+
+    //if name is empty
+    errors.name = "Name is required.";
+    if (!req.body.name) return res.status(400).send(errors);
+
+    if (req.body.name.length < 1 || req.body.name.length > 30) {
       errors.name = "Length must be between 5 and 30";
-      return res.send(errors);
+      return res.status(400).send(errors);
     }
+
     Category.findOne({ name: req.body.name }).then((cat) => {
       if (cat) {
         //update category
