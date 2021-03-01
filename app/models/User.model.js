@@ -10,7 +10,7 @@ const User = mongoose.model(
     password: String,
     userRole: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Roles",
+      ref: "roles",
     },
   })
 );
