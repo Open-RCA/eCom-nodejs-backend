@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 const { valid } = require("joi");
-Joi.objectId = require("joi-objectid")(Joi);
 
 const OrderSchema = mongoose.Schema({
   userId: {

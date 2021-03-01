@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-Joi.objectId = require("joi-objectid")(Joi);
 
 module.exports.OrderDetails = mongoose.model(
   "order_details",
