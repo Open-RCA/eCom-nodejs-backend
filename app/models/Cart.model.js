@@ -1,6 +1,5 @@
 const Joi = require('joi')
 const mongoose = require('mongoose')
-const Joi=require("joi")
 Joi.objectId=require('joi-objectid')(Joi)
 
 const Cart= mongoose.Schema({
