@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Joi=require("joi")
+Joi.objectId=require('joi-objectid')(Joi)
 
 const Cart= mongoose.Schema({
     user_id: {
@@ -15,10 +16,11 @@ const Cart= mongoose.Schema({
     }
 })
 
+
 function validateCart(Cart){
     const JoiSchema=Joi.object({
-        user_id:Joi.string().required(),
-        product_id:Joi.string().required(),
+        user_id:Joi.objectId().required(),
+        product_id:Joi.objectId().required(),
         date:Joi.date().required(),
     }).options({abortEarly:false});
     return JoiSchema.validate(Cart)
