@@ -2,7 +2,7 @@ const {
     Cart,
     validateCart,
   } = require('../models/Cart.model')
-
+// const Cart= require('../models/Cart.model')
 const CartController = {
     getCart(req,res){
         Cart.find()
@@ -11,6 +11,10 @@ const CartController = {
     },
 
     postCart(req,res){
+
+        // const { error } = validateCart(req.body);
+        // if (error) res.status(400).send(error);
+        
             let newCart = new Cart({
                 user_id: req.body.user_id,
                 product_id: req.body.product_id,
