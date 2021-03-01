@@ -1,14 +1,15 @@
 const mongoose=require('mongoose')
 const Joi=require('joi')
+Joi.objectId=require('joi-objectid')(Joi)
 const Schema=mongoose.Schema
 
 const Rate=new Schema({
     userId:{
-        type:String,
+        type:mongoose.Types.ObjectId,
         required:true
     },
     proId:{
-        type:String,
+        type:mongoose.Types.ObjectId,
         required:true
     },
     stars:{
@@ -23,8 +24,8 @@ const Rate=new Schema({
 
 function validatedRate(Rate) {
     const JoiSchema=Joi.object({
-        userId:Joi.string(),
-        proId:Joi.string(),
+        userId:Joi.objectId(),
+        proId:Joi.objectId(),
         stars:Joi.number().min(1).max(5),
         review:Joi.string()
     }).options({abortEarly:false});
