@@ -1,7 +1,7 @@
-const Joi = require('joi');
+const Joi = require('joi')
 const mongoose = require('mongoose')
 
-const CartSchema= mongoose.Schema({
+const Cart= mongoose.Schema({
     user_id: {
         type: mongoose.Types.ObjectId
     },
@@ -14,14 +14,14 @@ const CartSchema= mongoose.Schema({
         required: true
     }
 })
-module.exports=mongoose.model("cart",CartSchema)
 
-module.exports.validateCart = (CartSchema) => {
-    const JoiSchema = Joi.object({
-      user_id: Joi.objectId().required(),
-      product_id: Joi.objectId().required(),
-      date: Joi.date().required()
-    });
-  
-    return JoiSchema.validate(CartSchema);
-  };
+function validateCart(Cart){
+    const JoiSchema=Joi.object({
+        user_id:Joi.ObjectId().required(),
+        product_id:Joi.ObjectId().required(),
+        date:Joi.date().required(),
+    }).options({abortEarly:false});
+    return JoiSchema.validate(Cart)
+}
+module.exports.Cart=mongoose.model("Cart",Cart)
+module.exports.validateCart=validateCart
