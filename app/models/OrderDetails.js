@@ -8,10 +8,12 @@ module.exports.OrderDetails = mongoose.model(
     orderId: {
       type: mongoose.Types.ObjectId,
       required: true,
+      ref: "orders"
     },
     productId: {
       type: mongoose.Types.ObjectId,
       required: true,
+      ref: "products"
     },
     price: {
       type: Number,

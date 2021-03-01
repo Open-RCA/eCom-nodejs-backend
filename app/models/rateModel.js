@@ -9,7 +9,8 @@ const Rate=new Schema({
     },
     proId:{
         type:String,
-        required:true
+        required:true,
+        ref: "products"
     },
     stars:{
         type:Number,

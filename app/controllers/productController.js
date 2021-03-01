@@ -7,10 +7,10 @@ const {
 
 const storage = multer.diskStorage({
     destination: async function (req, file, cb) {
-        cb(null, "./open-rca/uploads");
+        cb(null, './app/uploads');
     },
     filename: function (req, file, cb) {
-        cb(null,new Date()+ file.originalname);
+        cb(null, file.originalname + '-' + Date.now());
     },
 })
 
@@ -37,7 +37,7 @@ createProduct = async (req, res) => {
         error
     } = validateProductSchema(body)
     if (error)
-        return res.status(400).send(error)
+        return res.status(400).send(error.details)
 
     const newProduct = new Product(body)
 

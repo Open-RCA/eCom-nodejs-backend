@@ -6,7 +6,8 @@ const CartSchema= mongoose.Schema({
     },
     product_id: {
         type: mongoose.Types.ObjectId,
-        required: true
+        required: true,
+        ref: "products"
     },
     date:{
         type: Date,

@@ -27,19 +27,20 @@ const ProductSchema = new Schema({
   },
   review: {
     type: String,
-    required: true,
+    required: false,
+    default: "",
   },
   productImages: {
     type: Array,
     required: true,
   },
   tag: {
-    type: String,
+    type: Array,
     required: true,
   },
   registerDate: {
     type: Date,
-    default: Date.now,
+    default: Date.now(),
   },
 });
 
@@ -49,9 +50,9 @@ function validateProductSchema(Product) {
     catId: Joi.string().required(),
     quantityInStock: Joi.number().required(),
     price: Joi.number().required(),
-    description: Joi.string().required().max(20).min(2),
-    review: Joi.string().required().max(20).min(2),
-    tag: Joi.string().required(),
+    description: Joi.string().required().max(100).min(2),
+    review: Joi.string().max(20).min(2),
+    tag: Joi.array().required(),
     registerDate: Joi.date(),
     productImages: Joi.array().required(),
   }).options({ abortEarly: false });
