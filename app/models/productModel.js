@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-Joi.objectId=require('joi-objectid')(Joi)
+import JoiObjectId from "joi-objectid"
+const JoiobjectId=JoiObjectId(Joi)
 
 const Schema = mongoose.Schema;
 
@@ -47,7 +48,7 @@ const ProductSchema = new Schema({
 function validateProductSchema(Product) {
   const JoiSchema = Joi.object({
     proName: Joi.string().required().max(20).min(2),
-    catId: Joi.objectId().required(),
+    catId: JoiobjectId().required(),
     quantityInStock: Joi.number().required(),
     price: Joi.number().required(),
     description: Joi.string().required().max(20).min(2),
