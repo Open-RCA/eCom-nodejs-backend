@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-import JoiObjectId from "joi-objectid"
+// import JoiObjectId from "joi-objectid"
+// const JoiobjectId=JoiObjectId(Joi)
+const JoiObjectId=require("joi-objectid")
 const JoiobjectId=JoiObjectId(Joi)
 
 const Schema = mongoose.Schema;
