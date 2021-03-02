@@ -1,6 +1,7 @@
-const Joi = require('joi')
 const mongoose = require('mongoose')
-Joi.objectId=require('joi-objectid')(Joi)
+const Joi=require("joi")
+import JoiObjectId from "joi-objectid"
+const JoiobjectId=JoiObjectId(Joi)
 
 const Cart= mongoose.Schema({
     user_id: {
@@ -19,8 +20,8 @@ const Cart= mongoose.Schema({
 
 function validateCart(Cart){
     const JoiSchema=Joi.object({
-        user_id:Joi.ObjectId().required(),
-        product_id:Joi.ObjectId().required(),
+        user_id:JoiobjectId().required(),
+        product_id:JoiobjectId().required(),
         date:Joi.date().required(),
     }).options({abortEarly:false});
     return JoiSchema.validate(Cart)
