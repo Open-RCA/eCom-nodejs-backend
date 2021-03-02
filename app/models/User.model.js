@@ -21,8 +21,8 @@ const validateUser = (user) => {
   const joiSchema = Joi.object({
     fullName: Joi.string().min(3).max(50).required(),
     email: Joi.string().required(),
-    phoneNumber: Joi.string().required(),
-    password: Joi.string().min(7).max(40).required(),
+    phoneNumber: Joi.string().required().min(10).max(10)
+    password: Joi.string().min(6).max(40).required(),
     userRole: Joi.objectId().required(),
   });
 
