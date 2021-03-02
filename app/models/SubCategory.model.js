@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-Joi.objectId=require('joi-objectid')(Joi)
 
 const SubCategorySchema = mongoose.Schema({
   categoryId: {
@@ -21,7 +20,7 @@ module.exports.SubCategory = mongoose.model(
 
 module.exports.validateSubCategory = (SubCategory) => {
   const JoiSchema = Joi.object({
-    categoryId: Joi.objectId().required(),
+    categoryId: Joi.string().required(),
     name: Joi.string().min(4).max(40).required(),
   });
 

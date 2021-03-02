@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-Joi.objectId=require('joi-objectid')(Joi)
-const { valid } = require("joi");
 
 const OrderSchema = mongoose.Schema({
   userId: {
@@ -20,7 +18,7 @@ const OrderSchema = mongoose.Schema({
 
 const validateOrder = (Order) => {
   const JoiSchema = Joi.object({
-    userId: Joi.objectId(),
+    userId: Joi.string(),
     paymentId: Joi.objectId().required(),
     order_date: Joi.date(),
   });

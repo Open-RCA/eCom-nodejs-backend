@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-Joi.objectId=require('joi-objectid')(Joi)
 
 module.exports.OrderDetails = mongoose.model(
   "order_details",
@@ -30,8 +29,8 @@ module.exports.OrderDetails = mongoose.model(
 
 module.exports.validateOrderDetails = (OrderDetails) => {
   const JoiSchema = Joi.object({
-    orderId: Joi.objectId().required(),
-    productId: Joi.objectId().required(),
+    orderId: Joi.string().required(),
+    productId: Joi.string().required(),
     price: Joi.number().required(),
     quantity: Joi.number().required(),
     total: Joi.number().required(),
