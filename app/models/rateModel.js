@@ -9,8 +9,9 @@ const Rate=new Schema({
         required:true
     },
     proId:{
-        type:mongoose.Types.ObjectId,
-        required:true
+        type:String,
+        required:true,
+        ref: "products"
     },
     stars:{
         type:Number,

@@ -8,7 +8,7 @@ router.get("/", SubController.getall);
 
 //get by id
 router.get("/:id", SubController.getBYid);
-
+    
 //get all products in subcategory
 
 //register sub-category

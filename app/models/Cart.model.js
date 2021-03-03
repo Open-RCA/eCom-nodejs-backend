@@ -1,18 +1,14 @@
 const mongoose = require('mongoose')
-const Joi=require("joi")
-// import JoiObjectId from "joi-objectid"
-// const JoiobjectId=JoiObjectId(Joi)
-
-const JoiObjectId=require("joi-objectid")
-const JoiobjectId=JoiObjectId(Joi)
-
+const Joi=require('joi')
+Joi.objectId=require('joi-objectid')(Joi)
 const Cart= mongoose.Schema({
     user_id: {
         type: mongoose.Types.ObjectId
     },
     product_id: {
         type: mongoose.Types.ObjectId,
-        required: true
+        required: true,
+        ref: "products"
     },
     date:{
         type: Date,
@@ -23,8 +19,8 @@ const Cart= mongoose.Schema({
 
 function validateCart(Cart){
     const JoiSchema=Joi.object({
-        user_id:JoiobjectId().required(),
-        product_id:JoiobjectId().required(),
+        user_id:Joi.objectId().required(),
+        product_id:Joi.objectId().required(),
         date:Joi.date().required(),
     }).options({abortEarly:false});
     return JoiSchema.validate(Cart)

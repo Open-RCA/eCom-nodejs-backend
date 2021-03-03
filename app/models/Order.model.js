@@ -11,6 +11,7 @@ const OrderSchema = mongoose.Schema({
   paymentId: {
     type: String,
     required: true,
+    ref: "payments"
   },
   order_date: {
     type: Date,
