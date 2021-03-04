@@ -22,7 +22,7 @@ module.exports.SubCategory = mongoose.model(
 module.exports.validateSubCategory = (SubCategory) => {
   const JoiSchema = Joi.object({
     categoryId: Joi.objectId().required(),
-    name: Joi.string().min(4).max(40).required(),
+    name: Joi.string().min(1).max(30).required(),
   });
 
   return JoiSchema.validate(SubCategory);

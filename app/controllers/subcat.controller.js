@@ -3,7 +3,6 @@ const {
   validateSubCategory,
 } = require("../models/SubCategory.model");
 const Category = require("../models/Category.model");
-const validator = require("validator");
 
 const SubController = {
   getall(req, res) {
@@ -54,12 +53,13 @@ const SubController = {
       .catch((err) => console.log(err));
   },
   updateSub(req, res) {
-    if (!validator.isLength(req.body.name, { min: 5, max: 30 })) {
-      return res.send({ name: "Length must be between 5 and 30" });
+    if (req.body.name.length < 1 || req.body.name.length > 30) {
+      errors.name = "Length must be between 5 and 30";
+      return res.status(400).send(errors);
     }
     SubCategory.findByIdAndUpdate(req.params.id, { name: req.body.name })
       .then((sub_cat) => {
-        if (sub_cat) return res.send({success: true, data: sub_cart});
+        if (sub_cat) return res.send({ success: true, data: sub_cart });
         res.send("Subcategory doesn't exist.");
       })
       .catch((err) => console.log(err));
@@ -67,7 +67,8 @@ const SubController = {
   deleteSub(req, res) {
     SubCategory.findByIdAndDelete(req.params.id)
       .then((sub_cat) => {
-        if (sub_cat) return res.send({ success: true, message: "Sub category deleted" });
+        if (sub_cat)
+          return res.send({ success: true, message: "Sub category deleted" });
         res.send("Subcategory doesn't exist.");
       })
       .catch((err) => console.log(err));
