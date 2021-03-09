@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const productRoutes = require("./app/routes/productRoute");
 const userRoutes = require("./app/routes/user.routes");
-const rateRoutes = require("./app/routes/ratingRoute");
+// const rateRoutes = require("./app/routes/ratingRoute");
 const authRoutes = require("./app/routes/auth.routes");
 const app = express();
 
@@ -26,7 +26,7 @@ app.use(`${baseUrlRoute}wishlist`, require("./app/routes/wishlist.routes"));
 
 app.use(`${baseUrlRoute}users/`, userRoutes);
 app.use(`${baseUrlRoute}products/`, productRoutes);
-app.use(`${baseUrlRoute}rating/`, rateRoutes);
+// app.use(`${baseUrlRoute}rating/`, rateRoutes);
 app.use(`${baseUrlRoute}auth/`, authRoutes);
 
 app.use(`${baseUrlRoute}category`, require("./app/routes/category"));
