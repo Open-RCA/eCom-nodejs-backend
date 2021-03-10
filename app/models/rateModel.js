@@ -18,7 +18,6 @@ const Rate=new Schema({
     },
     review:{
         type:String,
-        required:true
     }
 })
 

@@ -1,5 +1,5 @@
-const db=require("../models")
-const Rate=db.rate
+const {Rate, validatedRate} = require("../models/rateModel")
+// const {Rate}=db.rate
 
 
 const RatingController = {
