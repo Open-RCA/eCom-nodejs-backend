@@ -7,7 +7,7 @@ const {
 
 const storage = multer.diskStorage({
     destination: async function (req, file, cb) {
-        cb(null, "./open-rca/uploads");
+        cb(null, "./app/uploads");
     },
     filename: function (req, file, cb) {
         cb(null,new Date()+ file.originalname);

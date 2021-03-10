@@ -4,7 +4,7 @@ const authJwt = require('../middlewares/authJwt')
 const { verifyToken } = require('../middlewares/authJwt')
 const router=express.Router()
 
-router.get('/getAll',[verifyToken,productController.getProducts])
+router.get('/getAll',productController.getProducts)
 
 router.post('/addNewProduct',[verifyToken, authJwt.isAdmin, productController.upload.array('productImages'),productController.createProduct])
 

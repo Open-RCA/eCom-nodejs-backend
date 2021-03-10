@@ -1,4 +1,4 @@
-const db=require("../models")
+const {Rate,validatedRate}=require("../models/rateModel")
 const Rate=db.rate
 const dbConfig=require('../config/db.config')
 
