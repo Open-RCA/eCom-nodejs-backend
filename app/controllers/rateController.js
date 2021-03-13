@@ -1,6 +1,6 @@
-const db=require("../models")
-const Rate=db.rate
-const dbConfig=require('../config/db.config')
+const {Rate, validatedRate} = require("../models/rateModel")
+// const {Rate}=db.rate
+
 
 const RatingController = {
 

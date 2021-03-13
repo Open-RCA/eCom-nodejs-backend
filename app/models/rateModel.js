@@ -18,14 +18,13 @@ const Rate=new Schema({
     },
     review:{
         type:String,
-        required:true
     }
 })
 
 function validatedRate(Rate) {
     const JoiSchema=Joi.object({
-        userId:Joi.string(),
-        proId:Joi.string(),
+        userId:Joi.string().required(),
+        proId:Joi.string().required(),
         stars:Joi.number().min(1).max(5),
         review:Joi.string()
     }).options({abortEarly:false});
