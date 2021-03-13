@@ -1,17 +1,20 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-const { valid } = require("joi");
 Joi.objectId = require("joi-objectid")(Joi);
 
 const OrderSchema = mongoose.Schema({
-  userId: {
+  customer: {
     type: mongoose.Types.ObjectId,
     required: true,
   },
   paymentId: {
+    type: mongoose.Types.ObjectId,
+    required: true,
+    ref: "payments",
+  },
+  delivery_zone: {
     type: String,
     required: true,
-    ref: "payments"
   },
   order_date: {
     type: Date,
@@ -21,8 +24,9 @@ const OrderSchema = mongoose.Schema({
 
 const validateOrder = (Order) => {
   const JoiSchema = Joi.object({
-    userId: Joi.objectId(),
+    customer: Joi.objectId().required(),
     paymentId: Joi.objectId().required(),
+    delivery_zone: Joi.string().required(),
     order_date: Joi.date(),
   });
 
