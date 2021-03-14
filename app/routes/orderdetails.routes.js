@@ -10,7 +10,7 @@ router.get("/", [verifyToken, DetailsController.getall]);
 router.get("/:id", [verifyToken, DetailsController.getByid]);
 
 //add details for order
-router.post("/add", verifyToken, DetailsController.addDetails);
+// router.post("/add", verifyToken, DetailsController.addDetails);
 
 //remove
 router.delete("/remove/:id", [verifyToken, DetailsController.deleteDetails]);
