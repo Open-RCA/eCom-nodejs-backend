@@ -1,5 +1,5 @@
 const express = require("express");
-const RateController = require("../controllers/RateController");
+const RateController = require("../controllers/rateController");
 const { verifyToken } = require("../middlewares/authJwt");
 const router = express.Router();
 
