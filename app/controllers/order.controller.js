@@ -24,7 +24,16 @@ const OrderController = {
   },
   getByid(req, res) {
     Order.findById(req.params.id)
-      .then((orders) => res.send({ success: true, data: orders }))
+      .then((order) => {
+        let orderData = {};
+        orderData.order = order;
+        OrderDetails.find({ orderId: order._id })
+          .then((details) => {
+            orderData.details = details;
+            res.send({ success: true, data: orderData });
+          })
+          .catch((err) => res.send({ success: false, message: err.message }));
+      })
       .catch((err) => res.send({ success: false, message: err.message }));
   },
   async newOrder(req, res) {
