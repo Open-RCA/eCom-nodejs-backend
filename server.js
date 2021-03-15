@@ -4,7 +4,7 @@ const productRoutes = require("./app/routes/productRoute");
 const userRoutes = require("./app/routes/user.routes");
 const rateRoutes = require("./app/routes/ratingRoute");
 const authRoutes = require("./app/routes/auth.routes");
-require('./app/config/db.config')
+require("./app/config/db.config");
 const app = express();
 
 app.use(cors());
@@ -30,10 +30,6 @@ app.use(`${baseUrlRoute}category`, require("./app/routes/category"));
 app.use(`${baseUrlRoute}subcategory`, require("./app/routes/sub-categories"));
 app.use(`${baseUrlRoute}order`, require("./app/routes/order.route"));
 app.use(`${baseUrlRoute}payment`, require("./app/routes/payment.route"));
-app.use(
-  `${baseUrlRoute}orderdetails`,
-  require("./app/routes/orderdetails.routes")
-);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
