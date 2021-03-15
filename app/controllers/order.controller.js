@@ -11,7 +11,7 @@ const setProductsPrice = async (products, orderId) => {
         products[i].total = product.price * products[i].quantity;
         products[i].orderId = orderId;
       })
-      .catch((err) => console.log(err));
+      .catch((err) => res.send({success: false, message: err.message}));
   }
   return products;
 };
@@ -36,7 +36,7 @@ const OrderController = {
     };
 
     const { error } = validateOrder(order);
-    if (error) return res.status(400).send(error);
+    if (error) return res.status(400).send({message: error});
 
     //validate products
     const { products } = req.body;
@@ -59,7 +59,7 @@ const OrderController = {
             { new: true }
           )
             .then((n_order) => (orderId = String(n_order._id)))
-            .catch((err) => console.log(err));
+            .catch((err) => res.send({success: false, message: err.message}));
         } else {
           //create new
           await Order.create({
@@ -68,10 +68,10 @@ const OrderController = {
             delivery_zone: req.body.delivery_zone,
           })
             .then(async (neworder) => (orderId = String(neworder._id)))
-            .catch((err) => console.log(err));
+            .catch((err) => res.send({success: false, message: err}));
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => res.send({success: false, message: err.message}));
 
     //add details to products
     setProductsPrice(products, orderId)
@@ -79,7 +79,7 @@ const OrderController = {
         req.products = [...data];
         DetailsController.addProducts(req, res);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => res.send({success: false, message: err.message}));
   },
   deleteOrder(req, res) {
     //delete order and related details
