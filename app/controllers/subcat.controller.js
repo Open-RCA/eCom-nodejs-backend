@@ -17,7 +17,7 @@ const SubController = {
   },
   addNew(req, res) {
     const { error } = validateSubCategory(req.body);
-    if (error) res.status(400).send(error);
+    if (error) res.status(400).send(error.message);
 
     Category.findById(req.body.categoryId)
       .then((category) => {
